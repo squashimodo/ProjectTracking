@@ -1,0 +1,33 @@
+<h1>Current projects</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div class="span16">
+<table class="zebra-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Start Date</th>
+			<th>End Date</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+<% @projects.each do |p| %>
+	<tr>
+		<td><%= p.name %> </td>
+		<td><%= truncate(p.description, :length => 20) %></td>
+		<td><%= p.start_date %></td>
+		<td><%= p.end_date %></td>
+		<td><%= link_to("Go to project", {:action => "show", :id => p.id})%></td>
+	</tr>
+<% end %>
+</tbody>
+</table>
+</div>
+
+<%= link_to("Create new project", :action => "new")%>

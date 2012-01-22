@@ -1,0 +1,58 @@
+<h2>New ticket</h2>
+<p>Create a new ticket wich contains a certain task</p>
+<%= form_for [@project, @ticket], :url => project_ticket_path(@ticket.project_id)  do |t| %>
+	<%= render(:partial => "shared/error_messages", :locals => { :object => @ticket })%>	
+	<div>
+	<%= t.label :name %>
+	<%= t.text_field :name %>
+	</div>
+
+	<div>
+	<%= t.label :description %>
+	<%= t.text_field :description %>
+	</div>
+
+	<div>
+	<%= t.label :status %>
+	<%= collection_select(:ticket, :status_id , Status.all, :id, :name, { :prompt => true }) %>
+	</div>
+
+	<div>
+	<%= t.label :start_date %>
+	<%= t.text_field :start_date %>
+	</div>
+
+	<div>
+	<%= t.label :end_date %>
+	<%= t.text_field :end_date %>
+	</div>
+
+	<!--<%= t.hidden_field :project_id %>-->
+	<%= t.submit "Create ticket" %>
+<% end %>
+
+
+
+
+<% content_for :scripts do %>
+		<script>
+			$(function() {
+			var dates = $( "#ticket_start_date, #ticket_end_date" ).datepicker({
+				showAnim: "fadeIn",
+				defaultDate: "+1w",
+				buttonImage: "http://jqueryui.com/demos/datepicker/images/calendar.gif",
+				numberOfMonths: 1,
+				dateFormat: "yy-mm-dd",
+				onSelect: function( selectedDate ) {
+					var option = this.id == "ticket_start_date" ? "minDate" : "maxDate",
+						instance = $( this ).data( "datepicker" ),
+						date = $.datepicker.parseDate(
+							instance.settings.dateFormat ||
+							$.datepicker._defaults.dateFormat,
+							selectedDate, instance.settings );
+					dates.not( this ).datepicker( "option", option, date );
+				}
+			});
+		});
+	</script>
+<% end %>

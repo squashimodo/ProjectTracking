@@ -1,0 +1,52 @@
+<h1>Create new project</h1>
+<p>Find me in app/views/projects/new.html.erb</p>
+
+<%= form_for @project do |p| %>
+		<%= render(:partial => "shared/error_messages", :locals => { :object => @project })%>		
+	<div>
+	<%= p.label :name %>
+	<%= p.text_field :name %>
+	</div>
+
+	<div>
+	<%= p.label :description %>
+	<%= p.text_field :description %>
+	</div>
+
+	<div>
+	<%= p.label :start_date %>
+	<%= p.text_field :start_date %>
+	</div>
+
+	<div>
+	<%= p.label :end_date %>
+	<%= p.text_field :end_date %>
+	</div>
+	
+	<%= p.submit "Save" %>
+<% end %>
+
+
+
+<% content_for :scripts do %>
+		<script>
+			$(function() {
+			var dates = $( "#project_start_date, #project_end_date" ).datepicker({
+				showAnim: "fadeIn",
+				defaultDate: "+1w",
+				buttonImage: "http://jqueryui.com/demos/datepicker/images/calendar.gif",
+				numberOfMonths: 1,
+				dateFormat: "yy-mm-dd",
+				onSelect: function( selectedDate ) {
+					var option = this.id == "project_start_date" ? "minDate" : "maxDate",
+						instance = $( this ).data( "datepicker" ),
+						date = $.datepicker.parseDate(
+							instance.settings.dateFormat ||
+							$.datepicker._defaults.dateFormat,
+							selectedDate, instance.settings );
+					dates.not( this ).datepicker( "option", option, date );
+				}
+			});
+		});
+	</script>
+<% end %>

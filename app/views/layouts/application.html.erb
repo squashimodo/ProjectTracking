@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ProjectTracking</title>
+  <%= stylesheet_link_tag    "http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css" %>
+  
+  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag    "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/redmond/jquery-ui.css" %>
+  
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" %>
+  <%= csrf_meta_tags %>
+</head>
+<body style="padding-top: 60px">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="container">
+        <h3><%= link_to "Simple Project Manager", "/" %></h3>
+        <ul class="nav">
+          <li><%= link_to "Projects", {:action => "index", :controller => "projects" }  %></li>
+          <li><%= link_to "Users", {:action => "index", :controller => "users" }  %></li>
+          <li><%= link_to "Tickets", { :action => "index", :controller => "tickets" }  %></li>
+        </ul>
+        <div class="pull-right">
+        
+          <p><%= link_to "Logout", { :action => "logout", :controller => "access" } %></p>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+<% if !flash[:success].blank? %> 
+          <div class="alert-message flash success">
+            <a class="close" href="#">×</a>
+            <p><%= flash[:success] %></p>
+          </div>
+<% end %>
+<% if !flash[:error].blank? %> 
+          <div class="alert-message error flash">
+            <a class="close" href="#">×</a>
+            <p><%= flash[:error] %></p>
+          </div>
+<% end %>
+    <div class="content">
+      <div class="hero-unit">
+        <h1><span>Simple</span> Project Manager</h1>
+        <blockquote>
+        <p>"SPM makes scheduling, tracking, and planning a simple task!"</p>
+        <small>Clifford K. Berryman, Washington Post 2012</small>
+        </blockquote>
+      </div>
+      <div class="row"> 
+        <div class="span16">
+        <ul class="breadcrumb">
+          <li><a href="#">Home</a> <span class="divider">/</span></li>
+          <li><a href="#">Projects</a> <span class="divider">/</span></li>
+          <li><a href="#">Ruby on Rails</a> <span class="divider">/</span></li>
+          <li><a href="#">Tickets</a> <span class="divider">/</span></li>
+          <li class="active">"Finish database work"</li>
+        </ul>
+        </div>
+      </div>
+          <%= yield %>
+
+      <hr />
+      <!--<div class="row">
+        <div class="span-two-thirds">
+          <h3>Project</h3>
+          <p>Phasellus luctus gravida rhoncus. Nam dignissim odio at risus interdum non suscipit nisl scelerisque. Donec tincidunt enim eu ipsum vehicula sed dapibus odio dictum. Morbi purus purus, pharetra interdum molestie sed, fermentum porta mauris. Nulla iaculis massa tempus nisl auctor fringilla eleifend velit mollis. Curabitur mollis, enim quis porttitor tristique, leo dolor mattis nulla, condimentum hendrerit tellus sem at eros. Aliquam et felis felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin libero velit, hendrerit vitae pulvinar vel, dignissim eu eros. In euismod justo sit amet ipsum pretium sodales quis ac est. Mauris suscipit congue purus eget vulputate.</p>
+        </div>
+        <div class="span-one-third">
+          <h3>Users</h3>
+          <ul>
+            <li>Hans</li>
+            <li>Berit</li>
+            <li>Ulla-maja</li>
+            <li>Karlsson</li>
+            <li>Juholt</li>
+          </ul>
+        </div>
+      </div>-->
+      <footer class="row" id="footer">
+        <div class="span16">
+          <p style="float:left;">&copy; Hans Bentlov 2012</p>
+           <img src="assets/fb.png" style="float:right;" />
+      </footer>
+      <!--<div id="login_box">
+        <h2>Simple <span>Project Tracking</span> Login</h2>
+        
+        <div>
+          <input placeholder="Username" type="text" />
+        </div>
+        <div>
+          <input placeholder="Password" type="password" />
+        </div>
+        <input type="submit" class="btn error" value="Sign in"/>
+        
+        <div id="bottom">
+        <small>Forgot your password?</small> 
+        <small id="not_a_member">Not a member? Register!</small>
+        </div>
+      </div>-->
+    </div>
+  </div>
+  <%= yield :scripts %>   
+  <script>
+    $('.flash').delay('3000').slideUp('slow');
+  </script>
+  
+</body>
+</html>

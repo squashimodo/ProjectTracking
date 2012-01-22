@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="span-two-thirds">
+	<h2>Project: <%= @project.name %></h2>
+
+	<h3>Description</h3>
+	<%= @project.description %>
+
+	<h3>Startdate</h3>
+	<%= @project.start_date %><br />
+
+	<h3>Enddate</h3>
+	<%= @project.end_date %><br />
+	</div>
+	<div class="span-one-third">
+	<h3>Users</h3>
+	<ul class="unstyled" id="user_list">
+		<% @project.users.each do |u| %>
+			<li>
+							<div>
+							<%= image_tag(Gravatar.new(u.email).image_url, :size => "25x25", :class => "gravatar", :alt => u.username) %>
+							<p><%= u.first_name + " " + u.last_name %></p>
+							<div>
+			</li>
+		<% end %>
+	</ul>
+	</div>
+</div>
+<hr />
+
+<h3>Tickets</h3>
+	<%= render(:partial => "shared/tmp_tickets")%>
+	<% if @project.tickets.blank? %>
+		<p>
+			No tickets yet, 
+			<%= link_to(" add one?", new_project_ticket_url(@project)) %>
+		</p>
+	<% else %>
+		<% @project.tickets.each do |t| %>
+			
+			<h4><%= t.name %></h4>
+			<p><%= t.description %></p>
+			<p><%= t.start_date %></p>
+			<p><%= t.end_date %></p>
+			
+		<% end %>
+	<% end %>
+<br />
+<%= link_to("Home", {:action => "index"}) %>

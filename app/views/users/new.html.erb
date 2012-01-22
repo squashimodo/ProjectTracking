@@ -1,0 +1,37 @@
+<h2>New user</h2>
+
+<p>From here you can add a new user to the system. Users can only view the projects they are participating in, and have access to the tickets within them.</p>
+
+<%= form_for @user do |u| %>
+	<%= render(:partial => "shared/error_messages", :locals => { :object => @user })%>	
+	<div>
+	<%= u.label :username %>
+	<%= u.text_field :username %>
+	</div>
+
+	<div>
+	<%= u.label :first_name %>
+	<%= u.text_field :first_name %>
+	</div>
+
+	<div>
+	<%= u.label :last_name %>
+	<%= u.text_field :last_name %>
+	</div>
+
+	<div>
+	<%= u.label :email %>
+	<%= u.text_field :email %>
+	</div>
+
+	<div>
+	<%= u.label "Password" %>
+	<%= u.password_field :pw %>
+	</div>
+	<div>
+	<%= u.label "Confirm password" %>
+	<%= u.password_field :pw_confirmation %>
+	</div>
+	
+	<%= u.submit "Save" %>
+<% end %>
