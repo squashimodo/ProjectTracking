@@ -1,4 +1,5 @@
 class TicketsController < ApplicationController
+  before_filter :confirm_logged_in
   def index
     @tickets = Ticket.all
   end
@@ -16,9 +17,9 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(params[:ticket])
     @ticket.project_id = params[:project_id]
     @ticket.user_id = session[:user_id]
-    if @ticket.save 
+    if @ticket.save
       flash[:success] = "Ticket successfully created!"
-      redirect_to(:controller => "projects") 
+      redirect_to(:controller => "projects")
     else
       flash[:error] = "An error occured while trying to create a ticket, please try again"
       render("new")
