@@ -1,5 +1,6 @@
 class ProjektNull < ActiveRecord::Migration
   def change
-  	change_column("Projects", "name", :string, :null => false)
+
+  	change_column :projects, :name, :string, :null => false
   end
 end

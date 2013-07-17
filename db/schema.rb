@@ -14,12 +14,12 @@
 ActiveRecord::Schema.define(:version => 20120122185035) do
 
   create_table "projects", :force => true do |t|
-    t.string   "name",        :limit => 30,                 :null => false
-    t.string   "description",               :default => "", :null => false
+    t.string   "name",                        :null => false
+    t.string   "description", :default => "", :null => false
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.integer  "user_id"
   end
 
@@ -39,8 +39,21 @@ ActiveRecord::Schema.define(:version => 20120122185035) do
     t.string "name", :limit => 25, :null => false
   end
 
-# Could not dump table "tickets" because of following StandardError
-#   Unknown type 'bool' for column 'done'
+  create_table "tickets", :force => true do |t|
+    t.string   "name",        :limit => 30,                    :null => false
+    t.string   "description",               :default => "",    :null => false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.integer  "project_id"
+    t.integer  "status_id"
+    t.integer  "user_id",                                      :null => false
+    t.boolean  "done",                      :default => false
+  end
+
+  add_index "tickets", ["project_id"], :name => "index_tickets_on_project_id"
+  add_index "tickets", ["status_id"], :name => "index_tickets_on_status_id"
 
   create_table "users", :force => true do |t|
     t.string   "username",   :limit => 25,                :null => false
