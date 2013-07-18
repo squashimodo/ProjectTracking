@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash[:sucess] = "User created!"
+      flash[:success] = "User created!"
       redirect_to(:controller => :access, :action => :login )
     else
       flash[:error] = "Error while creating user"
