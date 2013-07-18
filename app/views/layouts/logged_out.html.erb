@@ -3,17 +3,17 @@
 <head>
   <title>ProjectTracking</title>
   <%= stylesheet_link_tag    "http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css" %>
-  
+
   <%= javascript_include_tag "application" %>
-  <%= stylesheet_link_tag    "access" %>
+  <%= stylesheet_link_tag    "application" %>
   <%= stylesheet_link_tag    "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/redmond/jquery-ui.css" %>
-  
+
   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
     <div class="content">
-      <% if !flash[:success].blank? %> 
+      <% if !flash[:success].blank? %>
           <div class="alert-message success flash" data-alert="alert">
             <a class="close" href="#">×</a>
             <p><%= flash[:success] %></p>
@@ -22,7 +22,7 @@
             $(".alert-message").delay(2000).fadeOut;
           </script>
       <% end %>
-      <% if !flash[:error].blank? %> 
+      <% if !flash[:error].blank? %>
           <div class="alert-message error flash">
             <a class="close" href="#">×</a>
             <p><%= flash[:error] %></p>
