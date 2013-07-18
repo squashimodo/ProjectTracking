@@ -8,10 +8,9 @@ class User < ActiveRecord::Base
 	belongs_to :ticket
 
 	# intern egenskap (hör inte till databasen)
-	attr_accessor :pw
-	attr_accessor :pw_confirmation
+	attr_accessor :pw, :pw_confirmation, :username, :first_name, :last_name, :email
 
-	
+
 	# Validering
 	validates :username,		:presence => true,
 													:length => { :maximum => 25, :minimum => 4 },
@@ -20,11 +19,11 @@ class User < ActiveRecord::Base
 
 	validates :first_name,	:presence => true,
 													:length => { :maximum => 25 }
-													
+
 	validates :last_name,		:presence => true,
 													:length => { :maximum => 25 }
-													
-	
+
+
 	validates_length_of :pw, :within => 8..255, :on => :create
 	validates_confirmation_of :pw
 
@@ -44,7 +43,7 @@ class User < ActiveRecord::Base
 		if u && u.password_match?(password)
 			return u
 		else
-			return false	
+			return false
 		end
 	end
 
